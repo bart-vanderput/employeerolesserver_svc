@@ -1,0 +1,40 @@
+<head>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div id="logo"></div>
+<div id="header">Roles for Employees</div>
+<div id="managerselection">
+    <form method="POST" action="/">
+         <select name="manager" >
+            <option value="" selected disabled hidden>Select a manager</option>
+            {{ range .Managers }} 
+            <option>{{ . }}</option>
+            {{ end }}
+        </select>
+        <button>Show</button>
+    </form>
+</div>
+{{ if .SelectedManager  }}
+<div id="employeelist">
+    <div id="managerheading">Manager: {{ .SelectedManager }}</div>
+    <div id="employeeheading">
+        <div id="employeenameheading">employee</div>
+        <div id="rolenameheading">roles</div>
+    </div>
+    {{ range .Employees }} 
+    <div class="employee">
+        <div class="employeeinfo">
+            <div class="employeename">{{ .Name }}</div>
+            <div class="department">{{ .Department }}</div>
+        </div>
+        <div class="roleinfo">
+            {{ range .Roles }}
+            <div class="rolename">{{ .RoleName }}</div>
+            {{ end }}
+        </div>
+    </div>
+    {{ end }}
+</div>
+{{ end }}   
+</body>
